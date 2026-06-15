@@ -1,0 +1,93 @@
+<!-- ============ HERO CINEMATIC SCROLL STORY ============ -->
+<section class="bh-hero">
+  <div class="bh-hero__pin" #heroPin>
+    <div class="bh-hero__scenes">
+      @for (scene of scenes; track scene.image; let i = $index) {
+        <div class="bh-scene" [class.bh-scene--active]="activeScene() === i">
+          <img [src]="scene.image" [alt]="scene.caption" class="bh-scene__img" />
+        </div>
+      }
+      <div class="bh-hero__vignette"></div>
+      <bh-floating-particles [count]="22" variant="dust"></bh-floating-particles>
+    </div>
+
+    <div class="bh-hero__copy">
+      <span class="bh-eyebrow">BrewHaus — Cinematic Coffee</span>
+      <h1 class="bh-hero__title">Crafted For<br />Moments.</h1>
+      <p class="bh-hero__subtitle">Specialty coffee brewed with precision and passion.</p>
+      <button class="bh-btn bh-hero__cta" (click)="scrollToCategories()">Start Ordering</button>
+
+      @if (table.tableNumber()) {
+        <p class="bh-hero__table">You're seated at Table {{ table.tableNumber() }}</p>
+      }
+    </div>
+
+    @if (showThankYou()) {
+      <div class="bh-thankyou">
+        <p class="bh-eyebrow">From Aroma Cafe</p>
+        <h2 class="bh-thankyou__title">شكراً لزيارتك ☕</h2>
+        <p class="bh-thankyou__sub">كل كوب نصنعه بحب وعناية خصيصاً لك</p>
+      </div>
+    }
+
+    <div class="bh-hero__scroll-hint" aria-hidden="true">
+      <span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATEGORY SECTION ============ -->
+<section class="bh-categories" id="categories">
+  <div class="bh-container">
+    <span class="bh-eyebrow">The Menu</span>
+    <h2 class="bh-categories__title">Choose Your Ritual</h2>
+
+    <div class="bh-cat-grid">
+      @for (cat of categories; track cat.slug) {
+        <article class="bh-cat-card" (click)="goToCategory(cat.slug)">
+          <div class="bh-cat-card__media">
+            <img [src]="cat.image" [alt]="cat.title" />
+            <div class="bh-cat-card__glow"></div>
+          </div>
+          <div class="bh-cat-card__body">
+            <h3>{{ cat.title }}</h3>
+            <p>{{ cat.tagline }}</p>
+            <span class="bh-cat-card__link">Explore →</span>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUR STORY ============ -->
+<section class="bh-story" id="contact">
+  <div class="bh-container bh-story__content">
+    <span class="bh-eyebrow">Our Story</span>
+    <h2>A ritual, slowed down.</h2>
+    <p class="bh-story__text">
+      BrewHaus began with a single idea: that coffee deserves the same attention as a fine
+      meal. Every bag is roasted in small batches, every cup brewed to order, and every
+      visit designed to feel unhurried — a quiet moment carved out of a loud day.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bh-footer">
+  <div class="bh-container bh-footer__grid">
+    <div>
+      <div class="bh-nav__logo">
+        <span class="bh-nav__logo-text">AromaCafe</span>
+      </div>
+      <p class="bh-footer__tag">Crafted for moments. Brewed with intention.</p>
+    </div>
+    <div class="bh-footer__contact">
+      <span class="bh-eyebrow">Contact</span>
+      <p>123 Roastery Lane, Cairo</p>
+      <p>hello&#64;aromacafe.com</p>
+      <p>+20 100 000 0000</p>
+    </div>
+  </div>
+  <p class="bh-footer__copy">© 2026 AromaCafe. All rights reserved. Built by : <a href="https://devtriplet-6425a.web.app/" class="company" target="_blank">DevTriplet</a></p>
+</footer>

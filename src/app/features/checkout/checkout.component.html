@@ -1,0 +1,75 @@
+<section class="bh-checkout">
+  <div class="bh-container bh-checkout__layout">
+
+    <div class="bh-receipt">
+      <div class="bh-receipt__header">
+        <span class="bh-eyebrow">Live Receipt</span>
+        <h1>Review &amp; Confirm</h1>
+        <p class="bh-receipt__table">Table {{ table.tableNumber() ?? '—' }}</p>
+      </div>
+
+      @if (cart.isEmpty()) {
+        <div class="bh-receipt__empty">
+          <p>Your cart is empty.</p>
+          <a routerLink="/" class="bh-btn bh-btn--ghost">Browse Menu</a>
+        </div>
+      } @else {
+        <div class="bh-receipt__items">
+          @for (item of cart.items(); track item.id) {
+            <div class="bh-receipt__item">
+              <div>
+                <strong>{{ item.quantity }}× {{ item.name }}</strong>
+                <p>{{ item.options.size }} · {{ item.options.sugar }}@if (item.options.milk) { · {{ item.options.milk }} }@if (item.options.extraShot) { · Extra Shot }@if (item.options.extraFlavor) { · Extra Flavor }</p>
+              </div>
+              <span>{{ (item.unitPrice * item.quantity).toFixed(2) }} EGP</span>
+            </div>
+          }
+        </div>
+
+        <div class="bh-receipt__totals">
+          <div class="bh-receipt__line"><span>Subtotal</span><span>{{ cart.subtotal().toFixed(2) }} EGP</span></div>
+          <div class="bh-receipt__line"><span>Tax (14%)</span><span>{{ cart.tax().toFixed(2) }} EGP</span></div>
+          <div class="bh-receipt__line bh-receipt__line--total"><span>Grand Total</span><span>{{ cart.total().toFixed(2) }} EGP</span></div>
+        </div>
+      }
+    </div>
+
+    @if (!cart.isEmpty()) {
+      <div class="bh-payment">
+        <span class="bh-eyebrow">Payment</span>
+        <h2>How would you like to pay?</h2>
+        <p class="bh-payment__hint">No need to call a waiter — just choose below and confirm.</p>
+
+        <div class="bh-payment__options">
+          <button
+            class="bh-payment__option"
+            [class.bh-payment__option--active]="paymentMethod() === 'cash'"
+            (click)="selectPayment('cash')"
+          >
+            <span class="bh-payment__icon">💵</span>
+            <span>Cash</span>
+          </button>
+          <button
+            class="bh-payment__option"
+            [class.bh-payment__option--active]="paymentMethod() === 'card'"
+            (click)="selectPayment('card')"
+          >
+            <span class="bh-payment__icon">💳</span>
+            <span>Visa / Card</span>
+          </button>
+        </div>
+
+        <button
+          class="bh-btn bh-payment__confirm"
+          [disabled]="!paymentMethod() || placingOrder()"
+          (click)="confirmOrder()"
+        >
+          @if (placingOrder()) { Placing Order... } @else { Confirm &amp; Send to Kitchen }
+        </button>
+
+        <p class="bh-payment__note">Your order will be sent directly to our barista team — track its status live on the next screen.</p>
+      </div>
+    }
+
+  </div>
+</section>

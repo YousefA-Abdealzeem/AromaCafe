@@ -1,0 +1,89 @@
+<header class="bh-nav" [class.bh-nav--scrolled]="scrolled()">
+
+  <div class="bh-nav__mobile-menu">
+    <button
+      class="bh-nav__hamburger"
+      (click)="menuOpen.set(!menuOpen())"
+      aria-label="Open Menu">
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+  </div>
+
+  <div class="bh-nav__side bh-nav__side--left">
+    <a href="#story" class="bh-nav__link">Our Story</a>
+    <a href="#contact" class="bh-nav__link">Contact</a>
+  </div>
+
+  <a routerLink="/" class="bh-nav__logo">
+    <img src="/assets/hero/logo nav.png" alt="Armoa Logo" class="bh-nav__logo-img" />
+  </a>
+
+  <div class="bh-nav__side bh-nav__side--right">
+
+    @if (table.tableNumber()) {
+      <span class="bh-nav__table">
+        Table {{ table.tableNumber() }}
+      </span>
+    }
+
+    <button
+      class="bh-nav__cart"
+      (click)="cartClick.emit()"
+      aria-label="Open cart">
+
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.6"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+
+        <path d="M3 3h2l.4 2M7 13h10l3-7H6.4M7 13L5.4 5M7 13l-1.6 4h12.2M9 21a1 1 0 100-2 1 1 0 000 2zM18 21a1 1 0 100-2 1 1 0 000 2z"/>
+
+      </svg>
+
+      @if (cart.itemCount() > 0) {
+        <span class="bh-nav__badge">
+          {{ cart.itemCount() }}
+        </span>
+      }
+
+    </button>
+
+  </div>
+
+</header>
+
+<div
+  class="bh-mobile-drawer"
+  [class.bh-mobile-drawer--open]="menuOpen()">
+
+  <a
+    href="#story"
+    class="bh-mobile-drawer__link"
+    (click)="menuOpen.set(false)">
+    Our Story
+  </a>
+
+  <a
+    href="#contact"
+    class="bh-mobile-drawer__link"
+    (click)="menuOpen.set(false)">
+    Contact
+  </a>
+
+</div>
+
+@if (menuOpen()) {
+  <div
+    class="bh-mobile-overlay"
+    (click)="menuOpen.set(false)">
+  </div>
+}

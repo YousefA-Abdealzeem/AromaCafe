@@ -1,0 +1,40 @@
+<section class="bh-menu-hero" [style.backgroundImage]="'url(' + (category()?.image ?? '') + ')'">
+  <div class="bh-menu-hero__overlay"></div>
+  <div class="bh-container bh-menu-hero__content">
+    <a routerLink="/" class="bh-menu-hero__back">← Back to BrewHaus</a>
+    <span class="bh-eyebrow">Menu</span>
+    <h1>{{ category()?.title }}</h1>
+    <p>{{ category()?.tagline }}</p>
+  </div>
+</section>
+
+<section class="bh-menu">
+  <div class="bh-container bh-menu__grid">
+    @for (product of products(); track product.id) {
+      <article class="bh-product-card" (click)="openProduct(product)">
+        <div class="bh-product-card__media">
+          <img [src]="product.image" [alt]="product.name" />
+        </div>
+        <div class="bh-product-card__body">
+          <div class="bh-product-card__head">
+            <h3>{{ product.name }}</h3>
+            <span class="bh-product-card__price">{{ product.price }} EGP</span>
+          </div>
+          <p>{{ product.description }}</p>
+          <span class="bh-product-card__cta">Customize →</span>
+        </div>
+      </article>
+    }
+  </div>
+</section>
+
+<bh-product-drawer
+  [product]="selectedProduct()"
+  [open]="drawerOpen()"
+  (closed)="closeDrawer()"
+  (added)="onAdded()"
+></bh-product-drawer>
+
+@if (addedToast()) {
+  <div class="bh-toast">Added to cart ✓</div>
+}

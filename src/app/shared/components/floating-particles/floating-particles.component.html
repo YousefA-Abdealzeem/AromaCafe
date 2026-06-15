@@ -1,0 +1,5 @@
+<div class="bh-particles" [ngClass]="'bh-particles--' + variant" aria-hidden="true">
+  @for (p of particles; track p) {
+    <span class="bh-particle" [style.--i]="p"></span>
+  }
+</div>

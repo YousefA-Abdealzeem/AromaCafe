@@ -1,0 +1,228 @@
+.bh-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 4vw;
+  background: rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(6px) saturate(140%);
+  -webkit-backdrop-filter: blur(6px) saturate(140%);
+  border-bottom: 1px solid rgba(245, 230, 211, 0.06);
+  transition: background 0.5s ease, backdrop-filter 0.5s ease, padding 0.4s ease;
+
+  &--scrolled {
+    padding: 1rem 4vw ;
+    background: rgba(8, 6, 5, 0.55);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-bottom-color: rgba(245, 230, 211, 0.1);
+    padding-bottom: 2rem;
+  }
+}
+
+.bh-nav__side {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+
+  &--right { justify-content: flex-end; }
+}
+
+.bh-nav__link {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  color: var(--bh-cream-dim);
+  transition: color 0.3s ease;
+
+  &:hover { color: var(--bh-amber); }
+}
+
+
+.bh-nav__logo-img{
+  height: 250px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.bh-nav__logo-mark {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--bh-amber);
+  color: var(--bh-amber);
+  font-size: 1rem;
+}
+
+.bh-nav__logo-text {
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--bh-cream);
+}
+
+.bh-nav__table {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 140, 43, 0.4);
+  color: var(--bh-amber);
+}
+
+.bh-nav__cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--bh-cream);
+  transition: color 0.3s ease, background 0.3s ease;
+
+  &:hover {
+    color: var(--bh-amber);
+    background: rgba(217, 140, 43, 0.08);
+  }
+}
+
+.bh-nav__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--bh-amber);
+  color: #14100d;
+  font-size: 0.65rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+@media (max-width: 720px) {
+  .bh-nav__side--left { display: none; }
+  .bh-nav { padding: 1.2rem 5vw; }
+}
+
+
+/* =========================
+   Mobile Toggle Menu
+========================= */
+
+.bh-nav__mobile-menu {
+  display: none;
+}
+
+.bh-nav__hamburger {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  span {
+    width: 18px;
+    height: 1.5px;
+    background: var(--bh-cream);
+    transition: all 0.3s ease;
+  }
+}
+
+.bh-mobile-drawer {
+  position: fixed;
+  top: 0;
+  left: -280px;
+
+  width: 280px;
+  height: 100vh;
+
+  z-index: 120;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  padding: 7rem 2rem 2rem;
+
+  background: rgba(8, 6, 5, 0.92);
+
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  border-right: 1px solid rgba(217, 140, 43, 0.15);
+
+  transition: left 0.45s cubic-bezier(.22,.61,.36,1);
+
+  &--open {
+    left: 0;
+  }
+}
+
+.bh-mobile-drawer__link {
+  color: var(--bh-cream);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+
+  &:hover {
+    color: var(--bh-amber);
+    transform: translateX(6px);
+  }
+}
+
+.bh-mobile-overlay {
+  position: fixed;
+  inset: 0;
+
+  z-index: 110;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* =========================
+   Mobile Only
+========================= */
+
+@media (max-width: 720px) {
+
+  .bh-nav__side--left {
+    display: none;
+  }
+
+  .bh-nav__mobile-menu {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .bh-nav__logo {
+    margin: auto;
+  }
+
+}

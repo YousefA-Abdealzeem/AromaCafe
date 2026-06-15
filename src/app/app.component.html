@@ -1,0 +1,8 @@
+
+<bh-navbar (cartClick)="openCart()"></bh-navbar>
+
+<main class="bh-main">
+  <router-outlet></router-outlet>
+</main>
+
+<bh-cart-drawer [open]="cartOpen()" (closed)="closeCart()"></bh-cart-drawer>

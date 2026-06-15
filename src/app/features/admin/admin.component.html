@@ -1,0 +1,81 @@
+<section class="bh-admin">
+  <div class="bh-container">
+    <span class="bh-eyebrow">BrewHaus Admin</span>
+    <h1>Operations Dashboard</h1>
+
+    <div class="bh-admin__tabs">
+      <button class="bh-admin__tab" [class.bh-admin__tab--active]="activeTab() === 'orders'" (click)="activeTab.set('orders')">Incoming Orders</button>
+      <button class="bh-admin__tab" [class.bh-admin__tab--active]="activeTab() === 'menu'" (click)="activeTab.set('menu')">Menu Management</button>
+    </div>
+
+    @if (activeTab() === 'orders') {
+      @if (orderService.orders().length === 0) {
+        <div class="bh-admin__empty">
+          <p>No orders yet.</p>
+          <span>Orders placed by customers will appear here in real time.</span>
+        </div>
+      } @else {
+        <div class="bh-admin__table">
+          <div class="bh-admin__row bh-admin__row--head">
+            <span>Receipt</span>
+            <span>Table</span>
+            <span>Items</span>
+            <span>Payment</span>
+            <span>Total</span>
+            <span>Status</span>
+          </div>
+          @for (order of orderService.orders(); track order.id) {
+            <div class="bh-admin__row">
+              <span class="bh-admin__receipt">{{ order.id }}</span>
+              <span class="bh-admin__table-num">Table {{ order.tableNumber }}</span>
+              <span class="bh-admin__items">
+                @for (item of order.items; track item.id) {
+                  <span class="bh-admin__item-tag">{{ item.quantity }}× {{ item.name }}</span>
+                }
+              </span>
+              <span class="bh-admin__payment">{{ order.paymentMethod === 'cash' ? '💵 Cash' : '💳 Card' }}</span>
+              <span class="bh-admin__total">{{ order.total.toFixed(2) }} EGP</span>
+              <span class="bh-admin__status-group">
+                @for (status of statuses; track status) {
+                  <button
+                    class="bh-admin__status-btn"
+                    [class.bh-admin__status-btn--active]="order.status === status"
+                    (click)="setStatus(order.id, status)"
+                  >
+                    {{ labels[status] }}
+                  </button>
+                }
+              </span>
+            </div>
+          }
+        </div>
+      }
+    }
+
+    @if (activeTab() === 'menu') {
+      <div class="bh-admin__menu">
+        @for (cat of categories(); track cat.slug) {
+          <div class="bh-admin__category">
+            <h3>{{ cat.title }}</h3>
+            <div class="bh-admin__products">
+              @for (product of productsFor(cat.slug); track product.id) {
+                <div class="bh-admin__product">
+                  <img [src]="product.image" [alt]="product.name" />
+                  <div>
+                    <strong>{{ product.name }}</strong>
+                    <p>{{ product.description }}</p>
+                  </div>
+                  <span>{{ product.price }} EGP</span>
+                </div>
+              }
+            </div>
+          </div>
+        }
+        <p class="bh-admin__menu-note">
+          Menu editing connects to the ASP.NET Core management API in the full build —
+          this view is read-only in the frontend prototype.
+        </p>
+      </div>
+    }
+  </div>
+</section>

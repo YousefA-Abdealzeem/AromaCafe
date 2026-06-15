@@ -1,0 +1,55 @@
+<section class="bh-status">
+  <div class="bh-container bh-status__inner">
+
+    @if (order(); as o) {
+      <span class="bh-eyebrow">Order Tracking</span>
+      <h1>Receipt {{ o.id }}</h1>
+      <p class="bh-status__meta">Table {{ o.tableNumber }} · Paying with {{ o.paymentMethod === 'cash' ? 'Cash' : 'Visa / Card' }}</p>
+
+      <div class="bh-progress">
+        @for (step of steps; track step; let i = $index) {
+          <div class="bh-progress__step" [class]="'bh-progress__step--' + stepState(step)">
+            <div class="bh-progress__dot">
+              @if (stepState(step) === 'done') {
+                <span>✓</span>
+              } @else {
+                <span>{{ i + 1 }}</span>
+              }
+            </div>
+            <span class="bh-progress__label">{{ labels[step] }}</span>
+          </div>
+          @if (i < steps.length - 1) {
+            <div class="bh-progress__connector" [class.bh-progress__connector--done]="i < currentIndex()"></div>
+          }
+        }
+      </div>
+
+      <div class="bh-status__card">
+        <h3>Order Summary</h3>
+        @for (item of o.items; track item.id) {
+          <div class="bh-status__item">
+            <span>{{ item.quantity }}× {{ item.name }}</span>
+            <span>{{ (item.unitPrice * item.quantity).toFixed(2) }} EGP</span>
+          </div>
+        }
+        <div class="bh-status__item bh-status__item--total">
+          <span>Grand Total</span>
+          <span>{{ o.total.toFixed(2) }} EGP</span>
+        </div>
+      </div>
+
+      <button class="bh-btn bh-btn--ghost bh-status__demo" (click)="simulateNext()">
+        Demo: Advance Status →
+      </button>
+
+      <a routerLink="/" class="bh-status__home">← Order Something Else</a>
+    } @else {
+      <div class="bh-status__notfound">
+        <h2>Order not found</h2>
+        <p>This receipt may have expired or your session was reset.</p>
+        <a routerLink="/" class="bh-btn">Back to BrewHaus</a>
+      </div>
+    }
+
+  </div>
+</section>

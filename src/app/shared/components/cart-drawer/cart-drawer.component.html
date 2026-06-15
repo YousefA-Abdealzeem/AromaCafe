@@ -1,0 +1,66 @@
+@if (open) {
+  <div class="bh-overlay" (click)="close()"></div>
+}
+
+<aside class="bh-cart" [class.bh-cart--open]="open">
+  <header class="bh-cart__header">
+    <div>
+      <h3>Your Order</h3>
+      @if (table.tableNumber()) {
+        <p class="bh-cart__table">Table {{ table.tableNumber() }}</p>
+      } @else {
+        <p class="bh-cart__table bh-cart__table--warn">No table detected — scan your table QR code</p>
+      }
+    </div>
+    <button class="bh-cart__close" (click)="close()" aria-label="Close cart">✕</button>
+  </header>
+
+  <div class="bh-cart__body">
+    @if (cart.isEmpty()) {
+      <div class="bh-cart__empty">
+        <p>Your cup is empty.</p>
+        <span>Browse the menu and add something delicious.</span>
+      </div>
+    } @else {
+      @for (item of cart.items(); track item.id) {
+        <article class="bh-cart-item">
+          <img [src]="item.image" [alt]="item.name" class="bh-cart-item__img" />
+          <div class="bh-cart-item__info">
+            <h4>{{ item.name }}</h4>
+            <p class="bh-cart-item__options">{{ optionsSummary(item.options) }}</p>
+            @if (item.options.notes) {
+              <p class="bh-cart-item__notes">"{{ item.options.notes }}"</p>
+            }
+            <div class="bh-cart-item__row">
+              <div class="bh-qty">
+                <button (click)="decrement(item.id, item.quantity)" aria-label="Decrease quantity">−</button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="increment(item.id, item.quantity)" aria-label="Increase quantity">+</button>
+              </div>
+              <span class="bh-cart-item__price">{{ (item.unitPrice * item.quantity).toFixed(2) }} EGP</span>
+            </div>
+          </div>
+          <button class="bh-cart-item__remove" (click)="remove(item.id)" aria-label="Remove item">✕</button>
+        </article>
+      }
+    }
+  </div>
+
+  @if (!cart.isEmpty()) {
+    <footer class="bh-cart__footer">
+      <div class="bh-cart__line">
+        <span>Subtotal</span>
+        <span>{{ cart.subtotal().toFixed(2) }} EGP</span>
+      </div>
+      <div class="bh-cart__line">
+        <span>Tax (14%)</span>
+        <span>{{ cart.tax().toFixed(2) }} EGP</span>
+      </div>
+      <div class="bh-cart__line bh-cart__line--total">
+        <span>Total</span>
+        <span>{{ cart.total().toFixed(2) }} EGP</span>
+      </div>
+      <button class="bh-btn bh-cart__checkout" (click)="goToCheckout()">Proceed to Checkout</button>
+    </footer>
+  }
+</aside>

@@ -1,0 +1,83 @@
+@if (open && product) {
+  <div class="bh-overlay" (click)="close()"></div>
+
+  <section class="bh-drawer" [class.bh-drawer--open]="open">
+    <button class="bh-drawer__close" (click)="close()" aria-label="Close">✕</button>
+
+    <div class="bh-drawer__head">
+      <img [src]="product.image" [alt]="product.name" class="bh-drawer__img" />
+      <div>
+        <h2>{{ product.name }}</h2>
+        <p>{{ product.description }}</p>
+        <span class="bh-drawer__price">From {{ product.price }} EGP</span>
+      </div>
+    </div>
+
+    <div class="bh-drawer__body">
+      @if (product.customization.sizes?.length) {
+        <div class="bh-option-group">
+          <span class="bh-option-label">Coffee Size</span>
+          <div class="bh-pill-row">
+            @for (s of product.customization.sizes; track s) {
+              <button class="bh-pill" [class.bh-pill--active]="size() === s" (click)="size.set(s)">{{ s }}</button>
+            }
+          </div>
+        </div>
+      }
+
+      @if (product.customization.sugarLevels?.length) {
+        <div class="bh-option-group">
+          <span class="bh-option-label">Sugar</span>
+          <div class="bh-pill-row">
+            @for (s of product.customization.sugarLevels; track s) {
+              <button class="bh-pill" [class.bh-pill--active]="sugar() === s" (click)="sugar.set(s)">{{ s }}</button>
+            }
+          </div>
+        </div>
+      }
+
+      @if (product.customization.milkOptions?.length) {
+        <div class="bh-option-group">
+          <span class="bh-option-label">Milk</span>
+          <div class="bh-pill-row">
+            @for (m of product.customization.milkOptions; track m) {
+              <button class="bh-pill" [class.bh-pill--active]="milk() === m" (click)="milk.set(m)">{{ m }}</button>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="bh-option-group">
+        <span class="bh-option-label">Extras</span>
+        <div class="bh-pill-row">
+          @if (product.customization.allowExtraShot) {
+            <button class="bh-pill" [class.bh-pill--active]="extraShot()" (click)="extraShot.set(!extraShot())">
+              Extra Espresso Shot <span class="bh-pill__price">+15</span>
+            </button>
+          }
+          @if (product.customization.allowExtraFlavor) {
+            <button class="bh-pill" [class.bh-pill--active]="extraFlavor()" (click)="extraFlavor.set(!extraFlavor())">
+              Extra Flavor <span class="bh-pill__price">+10</span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="bh-option-group">
+        <span class="bh-option-label">Notes for the Barista</span>
+        <textarea class="bh-notes" rows="2" placeholder="e.g. less ice, extra hot, no foam..." [(ngModel)]="notes" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+    </div>
+
+    <footer class="bh-drawer__footer">
+      <div class="bh-qty bh-qty--lg">
+        <button (click)="decQty()" aria-label="Decrease quantity">−</button>
+        <span>{{ quantity() }}</span>
+        <button (click)="incQty()" aria-label="Increase quantity">+</button>
+      </div>
+      <button class="bh-btn bh-drawer__add" (click)="addToCart()">
+        Add to Cart — {{ (unitPrice * quantity()).toFixed(2) }} EGP
+      </button>
+    </footer>
+  </section>
+}
