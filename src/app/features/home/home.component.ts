@@ -37,21 +37,18 @@ readonly categories = [
     title: 'Hot Drinks',
     image: 'assets/hero/5.png',
     tagline: 'Slow-extracted, full-bodied, served at the perfect temperature.',
-    color: '#5c3317' // Coffee Brown
   },
   {
     slug: 'iced-drinks',
     title: 'Iced Drinks',
     image: 'assets/hero/pexels-polina-kovaleva-7282737.jpg',
     tagline: 'Cold-brewed clarity over hand-cracked ice.',
-    color: '#d6b17d' // Caramel Beige
   },
   {
     slug: 'fresh-juice',
     title: 'Fresh Juice',
     image: 'assets/hero/pexels-semsibelli-16557598.jpg',
     tagline: 'Cold-pressed fruit, no concentrates, no shortcuts.',
-    color: '#8bcf7a' // Fresh Green
   }
 ];
 
@@ -129,7 +126,6 @@ const categoriesSection = document.querySelector<HTMLElement>('.bh-categories');
 
 if (categoriesSection) {
   categoryCards.forEach((card, index) => {
-    const color = this.categories[index].color;
 
     const trigger = ScrollTrigger.create({
       trigger: card,
@@ -140,7 +136,6 @@ if (categoriesSection) {
         gsap.to(categoriesSection, {
           duration: 0.8,
           ease: 'power2.out',
-          '--bh-dynamic-glow': color
         });
       },
 
@@ -148,7 +143,6 @@ if (categoriesSection) {
         gsap.to(categoriesSection, {
           duration: 0.8,
           ease: 'power2.out',
-          '--bh-dynamic-glow': color
         });
       }
     });

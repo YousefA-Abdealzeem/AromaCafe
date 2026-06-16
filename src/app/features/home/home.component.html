@@ -44,7 +44,7 @@
 
     <div class="bh-cat-grid">
       @for (cat of categories; track cat.slug) {
-        <article class="bh-cat-card" [style.--bh-cat-color]="cat.color" (click)="goToCategory(cat.slug)">
+        <article class="bh-cat-card" [style.--bh-cat-color]="cat" (click)="goToCategory(cat.slug)">
           <div class="bh-cat-card__media">
             <img [src]="cat.image" [alt]="cat.title" />
             <div class="bh-cat-card__glow"></div>
