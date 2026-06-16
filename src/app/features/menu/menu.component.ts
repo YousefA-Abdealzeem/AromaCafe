@@ -3,11 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MenuService } from '../../core/services/menu.service';
 import { Product, Category } from '../../core/models/product.model';
 import { ProductDrawerComponent } from '../../shared/components/product-drawer/product-drawer.component';
+import { CartDrawerComponent } from '../../shared/components/cart-drawer/cart-drawer.component';
 
 @Component({
   selector: 'bh-menu',
   standalone: true,
-  imports: [RouterLink, ProductDrawerComponent],
+  imports: [RouterLink, ProductDrawerComponent, CartDrawerComponent],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss'
 })
@@ -17,10 +18,9 @@ export class MenuComponent {
 
   readonly selectedProduct = signal<Product | null>(null);
   readonly drawerOpen = signal(false);
-  readonly addedToast = signal(false);
+  readonly cartOpen = signal(false);  // ← جديد
 
   constructor(private readonly route: ActivatedRoute, private readonly menu: MenuService) {
-    // Recompute whenever the route param changes (signal-based effect-free reaction).
     this.route.paramMap.subscribe((params) => {
       const slug = params.get('category') ?? '';
       this.category.set(this.menu.getCategory(slug));
@@ -39,7 +39,6 @@ export class MenuComponent {
 
   onAdded(): void {
     this.drawerOpen.set(false);
-    this.addedToast.set(true);
-    setTimeout(() => this.addedToast.set(false), 2200);
+    this.cartOpen.set(true);  // ← بدل الـ toast
   }
 }

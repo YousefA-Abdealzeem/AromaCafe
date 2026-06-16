@@ -31,26 +31,29 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     { image: 'assets/hero/6.png', caption: 'Crafted for you' }
   ];
 
-  readonly categories = [
-    {
-      slug: 'hot-drinks',
-      title: 'Hot Drinks',
-      tagline: 'Slow-extracted, full-bodied, served at the perfect temperature.',
-      image: 'assets/hero/5.png'
-    },
-    {
-      slug: 'iced-drinks',
-      title: 'Iced Drinks',
-      tagline: 'Cold-brewed clarity over hand-cracked ice.',
-      image: 'assets/hero/4.png'
-    },
-    {
-      slug: 'fresh-juice',
-      title: 'Fresh Juice',
-      tagline: 'Cold-pressed fruit, no concentrates, no shortcuts.',
-      image: 'assets/hero/3.png'
-    }
-  ];
+readonly categories = [
+  {
+    slug: 'hot-drinks',
+    title: 'Hot Drinks',
+    image: 'assets/hero/5.png',
+    tagline: 'Slow-extracted, full-bodied, served at the perfect temperature.',
+    color: '#5c3317' // Coffee Brown
+  },
+  {
+    slug: 'iced-drinks',
+    title: 'Iced Drinks',
+    image: 'assets/hero/pexels-polina-kovaleva-7282737.jpg',
+    tagline: 'Cold-brewed clarity over hand-cracked ice.',
+    color: '#d6b17d' // Caramel Beige
+  },
+  {
+    slug: 'fresh-juice',
+    title: 'Fresh Juice',
+    image: 'assets/hero/pexels-semsibelli-16557598.jpg',
+    tagline: 'Cold-pressed fruit, no concentrates, no shortcuts.',
+    color: '#8bcf7a' // Fresh Green
+  }
+];
 
   readonly activeScene = signal(0);
   readonly showThankYou = signal(false);
@@ -120,6 +123,39 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       }
     });
     this.triggers.push(copyTrigger);
+// ── Dynamic section glow per category ──
+const categoryCards = gsap.utils.toArray<HTMLElement>('.bh-cat-card');
+const categoriesSection = document.querySelector<HTMLElement>('.bh-categories');
+
+if (categoriesSection) {
+  categoryCards.forEach((card, index) => {
+    const color = this.categories[index].color;
+
+    const trigger = ScrollTrigger.create({
+      trigger: card,
+      start: 'top center',
+      end: 'bottom center',
+
+      onEnter: () => {
+        gsap.to(categoriesSection, {
+          duration: 0.8,
+          ease: 'power2.out',
+          '--bh-dynamic-glow': color
+        });
+      },
+
+      onEnterBack: () => {
+        gsap.to(categoriesSection, {
+          duration: 0.8,
+          ease: 'power2.out',
+          '--bh-dynamic-glow': color
+        });
+      }
+    });
+
+    this.triggers.push(trigger);
+  });
+}
 
     // ── Category cards reveal ──
     gsap.utils.toArray<HTMLElement>('.bh-cat-card').forEach((card, i) => {

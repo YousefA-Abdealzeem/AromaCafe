@@ -5,4 +5,4 @@
   <router-outlet></router-outlet>
 </main>
 
-<bh-cart-drawer [open]="cartOpen()" (closed)="closeCart()"></bh-cart-drawer>
+<bh-cart-drawer [open]="cartOpen()" (closed)="cartOpen.set(false)"></bh-cart-drawer>

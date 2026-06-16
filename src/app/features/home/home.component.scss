@@ -1,9 +1,11 @@
+
+
 // =========================================================
 // HERO — Cinematic Scroll Story
 // =========================================================
 .bh-hero {
   position: relative;
-  height: 100vh;
+  height: calc(100vh *3);
 }
 
 .bh-hero__pin {
@@ -120,9 +122,31 @@
 // CATEGORY SECTION
 // =========================================================
 .bh-categories {
+  --bh-dynamic-glow: #5c3317;
+
   position: relative;
-  padding: 8rem 0 7rem;
-  background: linear-gradient(180deg, #000 0%, #0c0907 100%);
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: radial-gradient(
+      circle at center,
+      var(--bh-dynamic-glow) 0%,
+      transparent 70%
+    );
+
+    opacity: 0.22;
+    transition: all 0.8s ease;
+  }
+}
+
+.bh-categories .bh-container {
+  position: relative;
+  z-index: 1;
 }
 
 .bh-categories__title {
@@ -132,7 +156,7 @@
 
 .bh-cat-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
 }
 
@@ -169,11 +193,13 @@
 }
 
 .bh-cat-card__glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 100%, rgba(217, 140, 43, 0.35), transparent 65%);
+  background: radial-gradient(circle at 50% 100%, var(--bh-cat-color, #d98c2b) 0%, transparent 65%);
   opacity: 0;
   transition: opacity 0.6s ease;
+}
+
+.bh-cat-card:hover .bh-cat-card__glow {
+  opacity: 0.35;
 }
 
 .bh-cat-card__body {
@@ -196,7 +222,13 @@
 // =========================================================
 .bh-story {
   padding: 8rem 0;
-  background: radial-gradient(ellipse at 50% 0%, rgba(75, 46, 31, 0.4), transparent 60%), #000;
+  // background: radial-gradient(ellipse at 50% 0%, rgba(75, 46, 31, 0.4), transparent 60%), #000;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  
+  background-image: url(/assets/hero/6.png);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .bh-story__content {
@@ -265,18 +297,51 @@
 
 .bh-nav__logo-img{
   height: 250px;
-  // position: absolute;
-  // margin: auto;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
 }
 
+.bh-footer__line {
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
+  color: inherit;
+}
+
+/* الخط نفسه */
+.bh-footer__line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 2px;
+  background: #9C6522;
+
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+/* hover effect */
+.bh-footer__line:hover {
+  color: #9C6522;
+}
+
+.bh-footer__line:hover::after {
+  transform: scaleX(1);
+}
+
+
+
+
 // =========================================================
 // THANK YOU MESSAGE
 // =========================================================
 .bh-thankyou {
+  display: block !important;
   position: absolute;
   inset: 0;
   z-index: 10;

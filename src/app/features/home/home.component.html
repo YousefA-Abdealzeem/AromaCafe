@@ -44,7 +44,7 @@
 
     <div class="bh-cat-grid">
       @for (cat of categories; track cat.slug) {
-        <article class="bh-cat-card" (click)="goToCategory(cat.slug)">
+        <article class="bh-cat-card" [style.--bh-cat-color]="cat.color" (click)="goToCategory(cat.slug)">
           <div class="bh-cat-card__media">
             <img [src]="cat.image" [alt]="cat.title" />
             <div class="bh-cat-card__glow"></div>
@@ -74,7 +74,7 @@
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="bh-footer">
+<footer class="bh-footer" id="footer">
   <div class="bh-container bh-footer__grid">
     <div>
       <div class="bh-nav__logo">
@@ -84,9 +84,9 @@
     </div>
     <div class="bh-footer__contact">
       <span class="bh-eyebrow">Contact</span>
-      <p>123 Roastery Lane, Cairo</p>
-      <p>hello&#64;aromacafe.com</p>
-      <p>+20 100 000 0000</p>
+      <a href="tel:+201000000000"><p class="bh-footer__line">Phone: (123) 456-7890</p></a>
+      <a href="mailto:contact@aromacafe.com"><p class="bh-footer__line">Email: contact@aromacafe.com</p></a>
+      <a href="https://www.google.com/maps/place/AromaCafe/@30.044405,31.235705,17z/data=!3m1!4b1!4m5!3m4!1s0x1458422c8b6d8d9b:0x9a8d8d8d8d8d8d8d!8m2!3d30.044405!4d31.235705" target="_blank"><p class="bh-footer__line">Address: 123 Brew St, Coffee City</p></a>
     </div>
   </div>
   <p class="bh-footer__copy">© 2026 AromaCafe. All rights reserved. Built by : <a href="https://devtriplet-6425a.web.app/" class="company" target="_blank">DevTriplet</a></p>

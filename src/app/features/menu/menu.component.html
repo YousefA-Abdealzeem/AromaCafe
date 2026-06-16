@@ -35,6 +35,6 @@
   (added)="onAdded()"
 ></bh-product-drawer>
 
-@if (addedToast()) {
-  <div class="bh-toast">Added to cart ✓</div>
-}
+<bh-cart-drawer [open]="cartOpen()" (closed)="cartOpen.set(false)"></bh-cart-drawer>
+
+

@@ -30,15 +30,20 @@ export class MenuService {
   ];
 
   private readonly products: Product[] = [
-    // Hot Drinks
+    // ─── Hot Drinks ───────────────────────────────────────────────────────────
     {
       id: 'h-espresso',
       categorySlug: 'hot-drinks',
       name: 'Single Origin Espresso',
       description: 'A concentrated shot of our house roast — notes of dark cocoa and toasted hazelnut.',
       price: 65,
-      image: 'assets/hero/5.png',
-      customization: { sizes: ['Small', 'Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/turkish_french_coffee.png',
+      customization: {
+        sizes: ['Small', 'Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
     {
       id: 'h-flat-white',
@@ -46,8 +51,14 @@ export class MenuService {
       name: 'Velvet Flat White',
       description: 'Double espresso with micro-foamed milk, silky and balanced.',
       price: 85,
-      image: 'assets/hero/6.png',
-      customization: { sizes: ['Small', 'Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'], milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/flat_white.png',
+      customization: {
+        sizes: ['Small', 'Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'],
+        milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
     {
       id: 'h-mocha',
@@ -55,8 +66,14 @@ export class MenuService {
       name: 'Dark Mocha',
       description: 'Espresso, steamed milk and Valrhona dark chocolate, finished with cocoa dust.',
       price: 95,
-      image: 'assets/hero/2.png',
-      customization: { sizes: ['Small', 'Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'], milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/mocha.png',
+      customization: {
+        sizes: ['Small', 'Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'],
+        milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
     {
       id: 'h-pourover',
@@ -64,19 +81,30 @@ export class MenuService {
       name: 'Ceremonial Pour-Over',
       description: 'A single-origin Ethiopian Yirgacheffe, hand-poured tableside.',
       price: 110,
-      image: 'assets/hero/1.png',
-      customization: { sizes: ['Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal'], allowExtraShot: false, allowExtraFlavor: false }
+      image: 'assets/hero/latte.png',
+      customization: {
+        sizes: ['Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal'],
+        allowExtraShot: false,
+        allowExtraFlavor: false
+      }
     },
 
-    // Iced Drinks
+    // ─── Iced Drinks ──────────────────────────────────────────────────────────
     {
       id: 'i-cold-brew',
       categorySlug: 'iced-drinks',
       name: 'Signature Cold Brew',
       description: '18-hour slow steep over filtered water, served over hand-cracked ice.',
       price: 90,
-      image: 'assets/hero/4.png',
-      customization: { sizes: ['Small', 'Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'], milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/iced_cold_brew.png',
+      customization: {
+        sizes: ['Small', 'Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'],
+        milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
     {
       id: 'i-iced-latte',
@@ -84,8 +112,14 @@ export class MenuService {
       name: 'Iced Vanilla Latte',
       description: 'Espresso over cold milk with house-made Madagascar vanilla syrup.',
       price: 95,
-      image: 'assets/hero/4.png',
-      customization: { sizes: ['Small', 'Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'], milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/iced_latte.png',
+      customization: {
+        sizes: ['Small', 'Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal', 'Extra Sugar'],
+        milkOptions: ['Whole Milk', 'Oat Milk', 'Almond Milk'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
     {
       id: 'i-affogato',
@@ -93,11 +127,16 @@ export class MenuService {
       name: 'Affogato',
       description: 'A scoop of vanilla bean gelato drowned in hot espresso, served chilled.',
       price: 105,
-      image: 'assets/hero/3.png',
-      customization: { sizes: ['Medium'], sugarLevels: ['No Sugar', 'Normal'], allowExtraShot: true, allowExtraFlavor: true }
+      image: 'assets/hero/affogato.png',
+      customization: {
+        sizes: ['Medium'],
+        sugarLevels: ['No Sugar', 'Normal'],
+        allowExtraShot: true,
+        allowExtraFlavor: true
+      }
     },
 
-    // Fresh Juice
+    // ─── Fresh Juice ──────────────────────────────────────────────────────────
     {
       id: 'j-citrus',
       categorySlug: 'fresh-juice',
@@ -105,7 +144,10 @@ export class MenuService {
       description: 'Cold-pressed orange, blood orange and a touch of ginger.',
       price: 75,
       image: 'assets/hero/3.png',
-      customization: { sizes: ['Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal'] }
+      customization: {
+        sizes: ['Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal']
+      }
     },
     {
       id: 'j-greens',
@@ -114,7 +156,10 @@ export class MenuService {
       description: 'Spinach, green apple, cucumber and mint, pressed to order.',
       price: 80,
       image: 'assets/hero/3.png',
-      customization: { sizes: ['Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal'] }
+      customization: {
+        sizes: ['Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal']
+      }
     },
     {
       id: 'j-berry',
@@ -123,7 +168,10 @@ export class MenuService {
       description: 'Strawberry, blackberry and raspberry, cold-pressed and unfiltered.',
       price: 85,
       image: 'assets/hero/3.png',
-      customization: { sizes: ['Medium', 'Large'], sugarLevels: ['No Sugar', 'Less Sugar', 'Normal'] }
+      customization: {
+        sizes: ['Medium', 'Large'],
+        sugarLevels: ['No Sugar', 'Less Sugar', 'Normal']
+      }
     }
   ];
 
